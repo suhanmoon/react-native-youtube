@@ -14,6 +14,7 @@ import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.uimanager.IllegalViewOperationException;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 
 import java.util.ArrayList;
@@ -80,8 +81,15 @@ public class YouTubeStandaloneModule extends ReactContextBaseJavaModule {
             return;
         }
 
-        final Intent intent = YouTubeStandalonePlayer.createVideoIntent(
-                    currentActivity, apiKey, videoId, startTimeMillis, autoplay, lightboxMode);
+        final Intent intent = new Intent(currentActivity, YouTubeActivity.class);
+        intent.putExtra("apiKey", apiKey);
+        intent.putExtra("videoId", videoId);
+        intent.putExtra("startTimeMillis", startTimeMillis);
+        intent.putExtra("autoplay", autoplay);
+//
+//
+//                YouTubeStandalonePlayer.createVideoIntent(
+//                    currentActivity, apiKey, videoId, startTimeMillis, autoplay, lightboxMode);
 
         play(intent, promise);
     }
